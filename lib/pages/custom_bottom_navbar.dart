@@ -37,23 +37,20 @@ class _CustomBottomNavbarState extends State<CustomBottomNavbar> {
         currentIndex: selectedIndex ,
         selectedItemColor: Colors.deepOrange,
         unselectedItemColor: Colors.black,
-        items: [
+        items: const[
           BottomNavigationBarItem(
-            icon: Icon(
-              selectedIndex == 0 ? Icons.home : Icons.home_outlined,
-              ),
+            icon: Icon(Icons.home_outlined),
+            activeIcon: Icon(Icons.home),
             label: 'Home'
           ),
           BottomNavigationBarItem(
-            icon: Icon(
-              selectedIndex == 1 ? Icons.favorite : Icons.favorite_border,
-              ),
+            icon: Icon(Icons.favorite_border),
+            activeIcon: Icon(Icons.favorite),
             label: 'Favorites'
           ),
           BottomNavigationBarItem(
-            icon: Icon(
-              selectedIndex == 2 ?  Icons.person : Icons.person_outline_outlined,
-              ), 
+            icon: Icon(Icons.person_outline_outlined), 
+            activeIcon: Icon(Icons.person,),
             label: 'Profile'
           ),
         ],
