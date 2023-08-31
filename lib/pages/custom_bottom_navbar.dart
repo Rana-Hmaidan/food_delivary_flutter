@@ -50,7 +50,7 @@ class _CustomBottomNavbarState extends State<CustomBottomNavbar> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person_outline_outlined), 
-            activeIcon: Icon(Icons.person,),
+            activeIcon: Icon(Icons.person),
             label: 'Profile'
           ),
         ],
