@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivary/models/category_item.dart';
 import 'package:food_delivary/models/food_item.dart';
+import 'package:food_delivary/pages/product_details_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -190,65 +192,74 @@ class _HomePageState extends State<HomePage> {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: filterdFood.length,
-                  itemBuilder: (context, index ) => Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(16.0),
-                      ),
-                      child: Stack(
-                        alignment: AlignmentDirectional.center,
-                        children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.network(
-                                filterdFood[index].imgUrl,
-                                height: 100,
-                              ),
-                              Text(
-                               filterdFood[index].name,
-                              style: const TextStyle(
-                                  fontSize: 18.0,
-                                  fontWeight: FontWeight.bold,
-                              ),
-                              ),
-                              Text(
-                               filterdFood[index].category,
-                              style: const TextStyle(
-                                  color: Colors.grey,
-                              ),
-                              ),
-                              const SizedBox(width: 4.0),
-                              Text(
-                              '\$ ${ filterdFood[index].price}',
-                              style: const TextStyle(
-                                  color: Colors.deepOrange,
-                                  fontSize: 18.0,
-                                  fontWeight: FontWeight.bold,
-                              ),
-                              ),
-                            ]),
-                            PositionedDirectional(
-                              top: 0,
-                              end: 0,
-                              child: IconButton(
-                                onPressed: (){
-                                setState(() {
-                                  filterdFood[index] = filterdFood[index].copyWith(isFavorite: !filterdFood[index].isFavorite);
-                                  final selectedFoodItem = food.firstWhere((item) => item.id == filterdFood[index].id);
-                                  final selectedFoodItemIndex = food.indexOf(selectedFoodItem);
-                                  food[selectedFoodItemIndex] = filterdFood[index];
-                                });
-                                },
-                                icon: Icon(
-                                  filterdFood[index].isFavorite == false ? Icons.favorite_border : Icons.favorite, 
-                                  color: Colors.deepOrange,
+                  itemBuilder: (context, index ) => InkWell(
+                    onTap: (){
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => ProductDetailsPage(foodItem: filterdFood[index],),
+                        ),
+                      );
+                    },
+                    child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(16.0),
+                        ),
+                        child: Stack(
+                          alignment: AlignmentDirectional.center,
+                          children: [
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.network(
+                                  filterdFood[index].imgUrl,
+                                  height: 100,
+                                ),
+                                Text(
+                                 filterdFood[index].name,
+                                style: const TextStyle(
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.bold,
+                                ),
+                                ),
+                                Text(
+                                 filterdFood[index].category,
+                                style: const TextStyle(
+                                    color: Colors.grey,
+                                ),
+                                ),
+                                const SizedBox(width: 4.0),
+                                Text(
+                                '\$ ${ filterdFood[index].price}',
+                                style: const TextStyle(
+                                    color: Colors.deepOrange,
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.bold,
+                                ),
+                                ),
+                              ]),
+                              PositionedDirectional(
+                                top: 0,
+                                end: 0,
+                                child: IconButton(
+                                  onPressed: (){
+                                  setState(() {
+                                    filterdFood[index] = filterdFood[index].copyWith(isFavorite: !filterdFood[index].isFavorite);
+                                    final selectedFoodItem = food.firstWhere((item) => item.id == filterdFood[index].id);
+                                    final selectedFoodItemIndex = food.indexOf(selectedFoodItem);
+                                    food[selectedFoodItemIndex] = filterdFood[index];
+                                  });
+                                  },
+                                  icon: Icon(
+                                    filterdFood[index].isFavorite == false ? Icons.favorite_border : Icons.favorite, 
+                                    color: Colors.deepOrange,
+                                  ),
                                 ),
                               ),
-                            ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
+                  ),
                 ),
               ],
             ),
